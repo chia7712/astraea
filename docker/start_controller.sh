@@ -77,10 +77,7 @@ RUN ./gradlew clean releaseTarGz
 RUN mkdir /opt/kafka
 RUN tar -zxvf \$(find ./core/build/distributions/ -maxdepth 1 -type f \( -iname \"kafka*tgz\" ! -iname \"*sit*\" \)) -C /opt/kafka --strip-components=1
 
-FROM ubuntu:23.10
-
-# install tools
-RUN apt-get update && apt-get install -y openjdk-21-jre
+FROM eclipse-temurin:21-jre-alpine
 
 # copy kafka
 COPY --from=build /opt/jmx_exporter /opt/jmx_exporter
